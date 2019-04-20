@@ -1,4 +1,3 @@
-#/usr/bin/python3
 #14 Segment LED Backpack Controller Object
 
 from smbus import *
