@@ -5,7 +5,6 @@ from RPi.GPIO import *
 class Button:
     def __init__(self, input_pin):
         setmode(BOARD)
-        print(input_pin)
         setup(input_pin, IN)
         self.input_pin = input_pin
 
@@ -17,5 +16,5 @@ class Button:
 
     def __str__(self):
         represent = 'Button: Pin %s, ' % str(self.input_pin)
-        represent += 'Activated' if self.press else 'Deactivated'
+        represent += 'Activated' if self.press() else 'Deactivated'
         return represent

@@ -37,10 +37,16 @@ class Segment:
                 name = name + ' '
             cell_index = 0
             for char in name:
-                self.write_block(cells[cell_index][0], 
-                 [self.characters[char][0]])
-                self.write_block(cells[cell_index][1], 
-                 [self.characters[char][1]])
+                if char in self.characters:
+                    self.write_block(cells[cell_index][0], 
+                     [self.characters[char][0]])
+                    self.write_block(cells[cell_index][1], 
+                     [self.characters[char][1]])
+                else:
+                    self.write_block(cells[cell_index][0], 
+                     [self.characters[' '][0]])
+                    self.write_block(cells[cell_index][1], 
+                     [self.characters[' '][1]])
                 cell_index += 1
 
     def __str__(self):

@@ -1,5 +1,5 @@
 import components.button, components.lightline, components.backpack
-import sys
+import sys, time
 
 class Column:
     def __init__(self, bus, segment_address, characters,
@@ -15,15 +15,14 @@ class Column:
         self.segment.update(name)
         while True:
             if self.switch.press(): 
-                print('Press')
-                self.switch.update()
+                self.mood_lights.update()
+                time.sleep(1)
     
     def off(self):
         if self.segment.on:
             self.segment.toggle_power()
         self.segment.update('clear')
-        if self.mood_lights.on:
-            self.mood_lights.toggle_power()
+        self.mood_lights.toggle_power('off')
         self.mood_lights.activated = 0
 
     def __str__(self):

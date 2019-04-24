@@ -23,13 +23,12 @@ columns = [(column.Column(
 
 if sys.argv[1] == 'off':
     for c in columns:
-        print(c)
         c[0].off()
+        print(c[0])
 
 else:
     for col in columns:
-        extra = multiprocessing.Pool(process = len(columns))
-        col[0].activate(col[1])
+        extra = multiprocessing.Pool(processes = len(columns))
         extra.apply_async(multihelp.run_activate(col[0], col[1]))
 
     

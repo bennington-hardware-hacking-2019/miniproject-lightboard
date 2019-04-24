@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from backpack import *
+from components.backpack import *
 import sys, time
 
 #Backpack
