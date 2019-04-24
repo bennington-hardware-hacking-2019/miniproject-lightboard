@@ -2,13 +2,15 @@
 
 from smbus import *
 
-class Segments:
-    def __init__(self, bus, address, modifier):
-        self.bus = bus
+class Segment:
+    def __init__(self, bus, address, character_list):
+        self.bus = SMBus(bus)
         self.address = address
-        self.modifier = modifier
         self.on = False
 
+        #Load Character Configuration
+        self.characters = character_list
+                
         #System Setup
         self.bus.write_byte(self.address, 0b00100001)
 
@@ -24,25 +26,23 @@ class Segments:
             self.bus.write_byte(self.address, 0b10000001)
 
     def update(self, name):
+        name = str(name).upper()
         cells = [(0b0, 0b1), (0b10, 0b11), 
          (0b100, 0b101), (0b110, 0b111)]
-        num = [63, 6, 91, 79, 102, 109, 125, 7, 127, 111, 0]
-        if name == 'clear':
+        if len(name) > 4:
             for cell in range(16):
                 self.write_block(cell, [0])
         else:
-            name = str(name)
             while len(name) < 4:
                 name = name + ' '
-            iter = 0
+            cell_index = 0
             for char in name:
-                retrieve = 10
-                try: 
-                   retrieve = int(char) 
-                except:
-                    pass
-                self.write_block(cells[iter], [num[retrieve]])
-                iter += 1
+                self.write_block(cells[cell_index][0], 
+                 [self.characters[char][0]])
+                self.write_block(cells[cell_index][1], 
+                 [self.characters[char][1]])
+                cell_index += 1
 
-#    def __str__(self):
+    def __str__(self):
+        return 'Segment Display:  Address %s' % self.address
 

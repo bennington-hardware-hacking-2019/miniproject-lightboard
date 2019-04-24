@@ -1,0 +1,28 @@
+{
+	"Five": {
+		"segments": {
+			"bus_number": 1, 
+			"address": 113
+			},
+		"button": 40,
+		"lightline": [16, 18, 22]
+	},
+
+	"column2": {
+		"segments": {
+			"bus_number": 0,
+			"address": 0
+		},
+		"button": 0,
+		"lightline" : []
+	},
+
+	"column3": {
+		"segments": {
+			"bus_number": 0,
+			"address": 0
+		},
+		"button": 0,
+		"lightline" : []
+	}
+}

@@ -5,11 +5,12 @@ from RPi.GPIO import *
 class Button:
     def __init__(self, input_pin):
         setmode(BOARD)
+        print(input_pin)
         setup(input_pin, IN)
         self.input_pin = input_pin
 
     def press(self):
-        if input(input_pin) == 1:
+        if input(self.input_pin) == 1:
             return True
         else:
             return False

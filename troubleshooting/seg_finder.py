@@ -3,14 +3,13 @@ from backpack import *
 import sys, time
 
 #Backpack
-backpack_address = 0x70
+backpack_address = 0x71
 
 #Initialize Controller for 14 Segment Display
-backpack = Segments(SMBus(1), backpack_address, 0b0)
+backpack = Segments(SMBus(1), backpack_address)
 
 backpack.toggle_power() 
 first, second = (0, 0)
-'''
 while True:
     a = input(str(first) + ' ' + str(second))
     if a == 'c':
@@ -36,6 +35,5 @@ while True:
         new = input('second: ')
         second = int(new)
         backpack.write_block(0b1, [second])
-'''
 backpack.toggle_power() 
 

@@ -1,4 +1,4 @@
-from RPI.GPIO import *
+from RPi.GPIO import *
 
 #Object Controls LEDs in a Line Configuration
 class LightLine:
@@ -7,25 +7,27 @@ class LightLine:
         self.activated = 0 #Selects which light is on
         self.on = False
         setwarnings(False)
-        for pin in lights:
+        for pin in self.lights:
             setup(pin, OUT)
 
     def toggle_power(self):
         if self.on:
-            for pin in lights:
+            for pin in self.lights:
                 output(pin, LOW)
             self.on = False
         else:
-            output(pin[self.counter], HIGH)
+            output(self.lights[self.activated], HIGH)
 
     def update(self):
         self.activated += 1 
-        if self.activated == len(lights):
+        if self.activated == len(self.lights):
             self.activated = 0 
         if self.on:
-            # I could have rewritten the code above but this was easier
+            # Temporarily Turns off Display
             self.toggle_power()
+            # Turns display back on with new light
             self.toggle_power()
-            
 
-        
+    def __str__(self):
+        return 'Lightline: Pins %s' % str(self.lights)
+
